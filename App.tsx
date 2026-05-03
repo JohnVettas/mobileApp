@@ -11,6 +11,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AddGasScreen from "./addGas";
+import GasStatsScreen from "./GasStats";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
@@ -98,6 +99,8 @@ function HomeScreen({ navigation }: any) {
                             // This triggers the delete logic you wrote
                             onLongPress={() => deleteEvent(item.id)}
                             // Provides visual feedback when long-pressing
+							onPress={() => navigation.navigate("GasStats", { eventId: item.id })}
+							// This style change gives a visual cue that the item is being pressed
                             style={({ pressed }) => [
                                 styles.row,
                                 { opacity: pressed ? 0.5 : 1 },
@@ -151,6 +154,7 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="AddGas" component={AddGasScreen} />
+				<Stack.Screen name="GasStats" component={GasStatsScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
